@@ -58,6 +58,7 @@ export const StringComponent: React.FC = () => {
     const addSymbols = (e: FormEvent<HTMLButtonElement> | FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         reverseInput(input);
+        setInput('')
     }
 
   return (
