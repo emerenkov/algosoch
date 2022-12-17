@@ -61,35 +61,35 @@ export const StringComponent: React.FC = () => {
         setInput('')
     }
 
-  return (
-    <SolutionLayout title="Строка">
-      <form className={stylesString.form} onSubmit={addSymbols}>
-        <Input
-            onChange={changeInput}
-            value={input}
-            maxLength={11}
-            isLimitText={true}
-        />
-        <Button
-            disabled={!input}
-            text="Развернуть"
-            linkedList="small"
-            onClick={addSymbols}
-            isLoader={isLoader}
-        />
-      </form>
-        <ul className={stylesString.list}>
-            {array.map((item, index) => {
-                return (
-                <Circle
-                    key={index}
-                    letter={item}
-                    index={index + 1}
-                    state={isColor(done, index, array)}
-                />
-                )
-            })}
-        </ul>
+    return (
+        <SolutionLayout title="Строка">
+            <form className={stylesString.form} onSubmit={addSymbols}>
+                <Input
+                onChange={changeInput}
+                value={input}
+                maxLength={11}
+                isLimitText={true}
+            />
+            <Button
+                disabled={!input}
+                text="Развернуть"
+                linkedList="small"
+                onClick={addSymbols}
+                isLoader={isLoader}
+            />
+        </form>
+            <ul className={stylesString.list}>
+                {array.map((item, index) => {
+                    return (
+                    <Circle
+                        key={index}
+                        letter={item}
+                        index={index + 1}
+                        state={isColor(done, index, array)}
+                    />
+                    )
+                })}
+            </ul>
     </SolutionLayout>
-  );
+    );
 };
