@@ -54,7 +54,10 @@ export const SortingPage: React.FC = () => {
         await delay(SHORT_DELAY_IN_MS);
       }
       swap(arr, i, maxInd);
-      arr[maxInd].state = ElementStates.Default;
+      arr[maxInd].state = ElementStates.Modified;
+      if(i === arr.length - 2) {
+        arr[i + 1].state = ElementStates.Modified;
+      }
       arr[i].state = ElementStates.Modified;
       setSortingArray([...arr]);
       await delay(SHORT_DELAY_IN_MS);
@@ -70,16 +73,16 @@ export const SortingPage: React.FC = () => {
         arr[j].state = ElementStates.Changing;
         arr[j + 1].state = ElementStates.Changing;
         setSortingArray([...arr]);
-        await delay(500);
+        await delay(SHORT_DELAY_IN_MS);
           if (arr[j].number > arr[j + 1].number && line) {
             swap(arr, j, j + 1);
             setSortingArray([...arr]);
-            await delay(500);
+            await delay(SHORT_DELAY_IN_MS);
           }
           if (arr[j].number < arr[j + 1].number && !line) {
             swap(arr, j, j + 1);
             setSortingArray([...arr]);
-            await delay(500);
+            await delay(SHORT_DELAY_IN_MS);
           }
         arr[j].state = ElementStates.Default;
         arr[j + 1].state = ElementStates.Default;
@@ -88,7 +91,7 @@ export const SortingPage: React.FC = () => {
       }
       arr[arr.length - i - 1].state = ElementStates.Modified;
       setSortingArray([...arr]);
-      await delay(500);
+      await delay(SHORT_DELAY_IN_MS);
     }
     setIsLoading(true);
   }
@@ -115,9 +118,7 @@ export const SortingPage: React.FC = () => {
     const coint = arrayLength > 17 ? 17 : arrayLength < 3 ? 3 : arrayLength;
     for (let i = 0; i < coint; i++) {
       let j = generationNumber()
-      // if(!array.includes(j)) {
         array[i] = j;
-      // }
     }
     const sortArr = array.map((number) => {
       return {
