@@ -41,7 +41,7 @@ export const FibonacciPage: React.FC = () => {
 
     return (
     <SolutionLayout title="Последовательность Фибоначчи">
-        <form className={stylesFibonacci.form}  >
+        <form className={stylesFibonacci.form} onSubmit={addSymbols} >
             <Input
                 type='number'
                 onChange={changeInput}
@@ -60,7 +60,7 @@ export const FibonacciPage: React.FC = () => {
         />
         </form>
         <ul className={stylesFibonacci.list}>
-            {array.map((item, index) => {
+            {array.length > 1 && array.map((item, index) => {
                 return (
                     <Circle
                         key={index}

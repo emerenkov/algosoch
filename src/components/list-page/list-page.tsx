@@ -37,6 +37,8 @@ export const ListPage: React.FC = () => {
   const [loaderAddIndex, setLoaderAddIndex] = useState<boolean>(false);
   const [loaderDeleteIndex, setLoaderDeleteIndex] = useState<boolean>(false);
 
+  const [evgen, setEvgen] = useState<string>();
+
   const list = new List<string>(initialArray);
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -195,28 +197,40 @@ export const ListPage: React.FC = () => {
 
   const deleteIndex = async (index: number) => {
     setLoaderDeleteIndex(true);
-    list.deleteByIndex(index);
-    for (let i = 0; i <= index; i++) {
-      listArr[i].state = ElementStates.Changing;
+    list.deleteByIndex(inputIndex);
+    for (let i = 0; i <= inputIndex; i++) {
+      listArr[i] = {
+        ...listArr[i],
+        state: ElementStates.Changing,
+      };
       await delay(DELAY_IN_MS);
       setListArr([...listArr]);
     }
-    listArr[index] = {
-      ...listArr[index],
+    listArr[inputIndex] = {
+      ...listArr[inputIndex],
       element: '',
       delete: true,
+      state: ElementStates.Changing,
       smallCircle: {
-        element: input,
+        element: null,
       },
     }
-    setListArr([...listArr]);
     await delay(DELAY_IN_MS);
-    listArr.splice(index, 1)
     setListArr([...listArr]);
+    listArr.splice(inputIndex, 1);
+
+    listArr[inputIndex - 1] = {
+      ...listArr[inputIndex - 1],
+      element: listArr[inputIndex - 1].element,
+      state: ElementStates.Modified,
+    };
     await delay(DELAY_IN_MS);
+    setListArr([...listArr]);
     listArr.forEach((elem) => {
       elem.state = ElementStates.Default;
     })
+    await delay(DELAY_IN_MS);
+    setListArr([...listArr])
     setLoaderDeleteIndex(false);
   }
 
@@ -249,14 +263,14 @@ export const ListPage: React.FC = () => {
                 text="Удалить из head"
                 type="button"
                 onClick={deleteHead}
-                disabled={loaderAddTail || loaderAddHead}
+                disabled={loaderAddTail || loaderAddHead || !listArr.length}
                 isLoader={loaderDeleteHead}
             />
             <Button
                 text="Удалить из tail"
                 type="button"
                 onClick={deleteTail}
-                disabled={loaderAddTail || loaderAddHead}
+                disabled={loaderAddTail || loaderAddHead || !listArr.length}
                 isLoader={loaderDeleteTail}
             />
           </div>
@@ -264,7 +278,10 @@ export const ListPage: React.FC = () => {
             <Input
                 type="number"
                 placeholder="Введите индекс"
+                max={9}
+                isLimitText={false}
                 value={inputIndex}
+                maxLength={1}
                 onChange={handleChangeIndex}
             />
             <Button
@@ -272,14 +289,23 @@ export const ListPage: React.FC = () => {
                 type="button"
                 onClick={addIndex}
                 isLoader={loaderAddIndex}
-                disabled={!input || !inputIndex}
+                disabled={
+                    !input
+                    || !inputIndex
+                    || inputIndex > listArr.length - 1
+                    || listArr.length >= 9
+                }
             />
             <Button
                 text="Удалить по индексу"
                 type="button"
                 onClick={(index) =>  deleteIndex(Number(index))}
                 isLoader={loaderDeleteIndex}
-                disabled={!inputIndex}
+                disabled={
+                    listArr.length === 0
+                    || inputIndex > listArr.length - 1
+                    || inputIndex < 1
+                }
             />
 
           </div>
