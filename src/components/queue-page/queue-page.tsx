@@ -7,6 +7,7 @@ import { Input } from "../ui/input/input"
 import {Queue} from "./utils";
 import { ElementStates } from "../../types/element-states";
 import {delay} from "../../utils/delay";
+import {SHORT_DELAY_IN_MS} from "../../constants/delays";
 
 export type TQueueItem = {
   head?: string;
@@ -32,7 +33,7 @@ export const QueuePage: React.FC = () => {
       setQueue(queue);
       queueArr[queue.getTail() - 1] = { value: '', color: ElementStates.Changing };
       setQueueArr([...queueArr]);
-      await delay(500);
+      await delay(SHORT_DELAY_IN_MS);
       queueArr[queue.getTail() - 1] = { value: input, color: ElementStates.Changing };
       setQueueArr([...queueArr]);
       queueArr[queue.getTail() - 1] = { value: input, color: ElementStates.Default };
@@ -46,7 +47,7 @@ export const QueuePage: React.FC = () => {
     setQueue(queue);
     queueArr[queue.getHead() - 1] = { value: queueArr[queue.getHead() - 1].value, color: ElementStates.Changing };
     setQueueArr([...queueArr]);
-    await delay(500);
+    await delay(SHORT_DELAY_IN_MS);
     queueArr[queue.getHead() - 1] = { value: '', color: ElementStates.Default };
     setQueueArr([...queueArr]);
     if (queue.getHead() === 7 && queue.getTail() === 7 && queue.isEmpty()) {
