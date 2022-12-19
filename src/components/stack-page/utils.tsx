@@ -5,6 +5,13 @@ interface IStack<T> {
     clear: () => void;
 }
 
+export interface ILoader {
+    add: boolean,
+    remove: boolean,
+    clean: boolean,
+    disabled: boolean,
+}
+
 export default class Stack<T> implements IStack<T> {
     private container: T[] = [];
 
