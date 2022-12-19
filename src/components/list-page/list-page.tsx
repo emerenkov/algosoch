@@ -37,8 +37,6 @@ export const ListPage: React.FC = () => {
   const [loaderAddIndex, setLoaderAddIndex] = useState<boolean>(false);
   const [loaderDeleteIndex, setLoaderDeleteIndex] = useState<boolean>(false);
 
-  const [evgen, setEvgen] = useState<string>();
-
   const list = new List<string>(initialArray);
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
