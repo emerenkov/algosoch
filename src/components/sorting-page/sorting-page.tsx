@@ -115,8 +115,8 @@ export const SortingPage: React.FC = () => {
   const randomArr = () => {
     const array:Array<number> = [];
     let arrayLength: number = generationNumber();
-    const coint = arrayLength > 17 ? 17 : arrayLength < 3 ? 3 : arrayLength;
-    for (let i = 0; i < coint; i++) {
+    const count = arrayLength > 17 ? 17 : arrayLength < 3 ? 3 : arrayLength;
+    for (let i = 0; i < count; i++) {
       let j = generationNumber()
         array[i] = j;
     }
