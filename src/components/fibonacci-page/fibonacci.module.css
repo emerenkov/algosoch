@@ -1,0 +1,23 @@
+.form {
+    outline: red solid inherit;
+    margin: 0 auto;
+    max-width: 570px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.list {
+    margin: 48px auto 0;
+    padding: 0;
+    max-width: 944px;
+    width: 100%;
+    display: flex;
+    row-gap: 48px;
+    column-gap: 16px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
