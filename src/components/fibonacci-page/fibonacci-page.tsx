@@ -59,7 +59,7 @@ export const FibonacciPage: React.FC = () => {
             isLoader={isLoader}
         />
         </form>
-        <ul className={stylesFibonacci.list}>
+        <div className={stylesFibonacci.list}>
             {array.length > 1 && array.map((item, index) => {
                 return (
                     <Circle
@@ -69,7 +69,7 @@ export const FibonacciPage: React.FC = () => {
                     />
                 )
         })}
-        </ul>
+        </div>
     </SolutionLayout>
     );
 };

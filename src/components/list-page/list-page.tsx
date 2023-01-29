@@ -230,6 +230,7 @@ export const ListPage: React.FC = () => {
     await delay(DELAY_IN_MS);
     setListArr([...listArr])
     setLoaderDeleteIndex(false);
+    setInputIndex(1);
   }
 
   return (
@@ -237,6 +238,7 @@ export const ListPage: React.FC = () => {
         <div className={styleList.container}>
           <div className={styleList.form}>
             <Input
+                data-tested='input'
                 placeholder="Введите значение"
                 isLimitText={true}
                 maxLength={4}
@@ -261,25 +263,28 @@ export const ListPage: React.FC = () => {
                 text="Удалить из head"
                 type="button"
                 onClick={deleteHead}
-                disabled={loaderAddTail || loaderAddHead || !listArr.length}
+                disabled={loaderAddTail || loaderAddHead
+            }
                 isLoader={loaderDeleteHead}
             />
             <Button
                 text="Удалить из tail"
                 type="button"
                 onClick={deleteTail}
-                disabled={loaderAddTail || loaderAddHead || !listArr.length}
+                disabled={loaderAddTail || loaderAddHead
+            }
                 isLoader={loaderDeleteTail}
             />
           </div>
           <div className={styleList.form}>
             <Input
-                type="number"
+                data-tested='input-index'
+                // type="number"
                 placeholder="Введите индекс"
-                max={9}
+                min={0}
+                max={listArr.length - 1}
                 isLimitText={false}
                 value={inputIndex}
-                maxLength={1}
                 onChange={handleChangeIndex}
             />
             <Button
@@ -291,7 +296,6 @@ export const ListPage: React.FC = () => {
                     !input
                     || !inputIndex
                     || inputIndex > listArr.length - 1
-                    || listArr.length >= 9
                 }
             />
             <Button
@@ -300,9 +304,9 @@ export const ListPage: React.FC = () => {
                 onClick={(index) =>  deleteIndex(Number(index))}
                 isLoader={loaderDeleteIndex}
                 disabled={
-                    listArr.length === 0
+                    !inputIndex
+                    || listArr.length === 0
                     || inputIndex > listArr.length - 1
-                    || inputIndex < 1
                 }
             />
 
