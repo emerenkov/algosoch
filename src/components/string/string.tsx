@@ -69,6 +69,7 @@ export const StringComponent: React.FC = () => {
                 value={input}
                 maxLength={11}
                 isLimitText={true}
+                data-testid='input'
             />
             <Button
                 disabled={!input}
@@ -76,12 +77,14 @@ export const StringComponent: React.FC = () => {
                 linkedList="small"
                 onClick={addSymbols}
                 isLoader={isLoader}
+                data-testid='button'
             />
         </form>
             <ul className={stylesString.list}>
                 {array.map((item, index) => {
                     return (
                     <Circle
+                        data-testid={'testCircle'}
                         key={index}
                         letter={item}
                         index={index + 1}
