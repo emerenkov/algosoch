@@ -7,8 +7,10 @@ import {Column} from "../ui/column/column";
 import {ElementStates} from "../../types/element-states";
 import {delay} from "../../utils/delay";
 import {SHORT_DELAY_IN_MS} from "../../constants/delays";
+import {swap} from "./utils";
 
-interface IRandomArr {
+
+export interface IRandomArr {
   number: number,
   state: ElementStates,
 }
@@ -21,12 +23,6 @@ export const SortingPage: React.FC = () => {
 
   const onChangeRadio = (e: ChangeEvent<HTMLInputElement>): void => {
     setOptSort((e.target as HTMLInputElement).value);
-  };
-
-  const swap = (arr: Array<IRandomArr>, firstIndex: number, secondIndex: number): void => {
-    const temp = arr[firstIndex];
-    arr[firstIndex] = arr[secondIndex];
-    arr[secondIndex] = temp;
   };
 
   const selectionSort = async (line:boolean) => {
